@@ -31,11 +31,12 @@ payload = {
     "rain": rain,
     "wind_speed": wind_speed,
     "wind_direction": wind_dir,
-    "humidity": humidity,
-    "timestamp": datetime.now().isoformat()
+    "humidity": humidity
 }
+
 
 response = requests.post(thingsboard_url, json=payload)
 
 print("Status:", response.status_code)
 print("Antwort:", response.text)
+
