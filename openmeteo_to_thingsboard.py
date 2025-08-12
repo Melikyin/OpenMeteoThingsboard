@@ -10,7 +10,7 @@ url = "https://api.open-meteo.com/v1/forecast"
 params = {
     "latitude": 50.5441,
     "longitude": 9.6811,
-    "hourly": "temperature_2m,rain,wind_speed_80m,wind_direction_80m,relative_humidity_2m",
+    "current": "temperature_2m,relative_humidity_2m,rain,wind_speed_10m,wind_direction_10m,snowfall,showers",
     "timezone": "Europe/Berlin"
 }
 
@@ -39,6 +39,7 @@ response = requests.post(thingsboard_url, json=payload)
 
 print("Status:", response.status_code)
 print("Antwort:", response.text)
+
 
 
 
