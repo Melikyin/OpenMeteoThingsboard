@@ -6,13 +6,8 @@ from datetime import datetime
 ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 
 # Open-Meteo API Parameter
-url = "https://api.open-meteo.com/v1/forecast"
-params = {
-    "latitude": 52.52,
-    "longitude": 13.41,
-    "hourly": "temperature_2m,rain,wind_speed_80m,wind_direction_80m,relative_humidity_2m",
-    "timezone": "auto"
-}
+api_url =
+"https://api.open-meteo.com/v1/forecast?latitude=50.5441&longitude=9.6811&hourly=temperature_2m,rain,wind_speed_80m,wind_direction_80m,relative_humidity_2m&timezone=auto"
 
 # 1. Wetterdaten abrufen
 weather = requests.get(url, params=params).json()
@@ -39,5 +34,6 @@ response = requests.post(thingsboard_url, json=payload)
 
 print("Status:", response.status_code)
 print("Antwort:", response.text)
+
 
 
