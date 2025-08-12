@@ -1,9 +1,10 @@
 import requests
 from datetime import datetime
-import os
 
-ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]  # Holt Token aus GitHub Secret
+# Dein Access Token aus ThingsBoard
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 
+# Open-Meteo API Parameter
 url = "https://api.open-meteo.com/v1/forecast"
 params = {
     "latitude": 52.52,
@@ -12,14 +13,17 @@ params = {
     "timezone": "auto"
 }
 
+# 1. Wetterdaten abrufen
 weather = requests.get(url, params=params).json()
 
+# 2. Ersten Wert (aktuelle Stunde) extrahieren
 temp = weather["hourly"]["temperature_2m"][0]
 rain = weather["hourly"]["rain"][0]
 wind_speed = weather["hourly"]["wind_speed_80m"][0]
 wind_dir = weather["hourly"]["wind_direction_80m"][0]
 humidity = weather["hourly"]["relative_humidity_2m"][0]
 
+# 3. Daten an ThingsBoard senden
 thingsboard_url = f"https://iot-demo.bda-itnovum.com/api/v1/{ACCESS_TOKEN}/telemetry"
 payload = {
     "temperature": temp,
@@ -31,4 +35,6 @@ payload = {
 }
 
 response = requests.post(thingsboard_url, json=payload)
-print("Status:", response.status_code, "Antwort:", response.text)
+
+print("Status:", response.status_code)
+print("Antwort:", response.text)
