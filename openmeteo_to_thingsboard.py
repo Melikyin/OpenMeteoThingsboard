@@ -33,10 +33,11 @@ payload = {
     "wind_direction": wind_dir,
     "humidity": humidity
 }
-
+payload = {k: v for k, v in payload.items() if v is not None}
 
 response = requests.post(thingsboard_url, json=payload)
 
 print("Status:", response.status_code)
 print("Antwort:", response.text)
+
 
