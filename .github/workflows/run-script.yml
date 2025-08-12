@@ -2,7 +2,7 @@ name: Run Open-Meteo to ThingsBoard
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Jede Stunde
+    - cron: "*/30 * * * *"  # Jede Stunde
   workflow_dispatch:     # Manuelles Starten möglich
 
 jobs:
