@@ -1,0 +1,27 @@
+name: Run Open-Meteo to ThingsBoard
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # Jede Stunde
+  workflow_dispatch:     # Manuelles Starten möglich
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: python openmeteo_to_thingsboard.py
