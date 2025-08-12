@@ -1,4 +1,5 @@
 import requests
+import os
 from datetime import datetime
 
 # Dein Access Token aus ThingsBoard
