@@ -1,10 +1,9 @@
 import requests
 import os
 
-# Dein Access Token aus ThingsBoard
 ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 
-# Open-Meteo API Parameter (Current Weather)
+# Open-Meteo API Parameter
 url = "https://api.open-meteo.com/v1/forecast"
 params = {
     "latitude": 50.5441,
@@ -13,10 +12,8 @@ params = {
     "timezone": "Europe/Berlin"
 }
 
-# 1. Wetterdaten abrufen
 weather = requests.get(url, params=params).json()
 
-# 2. Werte aus dem "current"-Block lesen
 current_data = weather["current"]
 
 payload = {
@@ -29,9 +26,9 @@ payload = {
     "showers": current_data.get("showers")
 }
 
-# 3. An ThingsBoard senden
 thingsboard_url = f"https://iot-demo.bda-itnovum.com/api/v1/{ACCESS_TOKEN}/telemetry"
 response = requests.post(thingsboard_url, json=payload)
 
 print("Status:", response.status_code)
 print("Antwort:", response.text)
+
